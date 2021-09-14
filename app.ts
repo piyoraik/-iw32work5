@@ -1,4 +1,7 @@
 import express from 'express'
+
+import userRouter from './router/users'
+import indexRouter from './router'
 import { port } from './config'
 
 var app = express()
@@ -8,8 +11,8 @@ app.use(express.static(__dirname + '/views', { index: false }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/', require('./router/index.ts'))
-app.use('/users', require('./router/users.ts'))
+app.use('/', indexRouter)
+app.use('/users', userRouter)
 
 const httpStatus = require('http-status-codes')
 app.use(function (req, res, next) {

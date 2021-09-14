@@ -1,29 +1,29 @@
 import { Router } from 'express'
 
-const router = Router()
+const userRouter = Router()
 
-router.get('/', function (req, res) {
+userRouter.get('/', function (req, res) {
   console.log('GET: ' + req.query.name)
   var senddata = {
     name: req.query.name,
   }
   res.send(senddata)
 })
-router.post('/', function (req, res) {
+userRouter.post('/', function (req, res) {
   console.log('POST: ' + req.body.name)
   var senddata = {
     name: req.body.name,
   }
   res.send(senddata)
 })
-router.put('/', function (req, res) {
+userRouter.put('/', function (req, res) {
   console.log('PUT: ' + req.body.name)
   var senddata = {
     name: req.body.name,
   }
   res.send(senddata)
 })
-router.delete('/', function (req, res) {
+userRouter.delete('/', function (req, res) {
   console.log('DELETE: ' + req.body.name)
   var senddata = {
     name: req.body.name,
@@ -31,4 +31,4 @@ router.delete('/', function (req, res) {
   res.send(senddata)
 })
 
-module.exports = router
+export = userRouter
