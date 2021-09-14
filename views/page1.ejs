@@ -1,0 +1,94 @@
+<%- include('partials/header.ejs'); %> index4-5.html<br />
+
+  <form>
+    <input type="text" name="name" id="textvalue" />
+  </form>
+  <button type="submit" id="getbutton">get send</button>
+  <button type="submit" id="postbutton">post send</button>
+  <button type="submit" id="putbutton">put send</button>
+  <button type="submit" id="deletebutton">delete send</button>
+
+  <div id="output"></div>
+
+  <% for (var i=0; i < 10; i++) { %>
+    <p>このループは<%= i+1 %>回目です。</p>
+    <% } %>
+
+      <p>画面表示回数は<%= cnt %>回です</p>
+
+      <script>
+        $("#getbutton").click(function (e) {
+          var values = {
+            name: $("#textvalue").val(),
+          };
+          $.ajax({
+            type: "GET",
+            data: values,
+            url: "./users",
+          })
+            .done(function (results) {
+              console.log(results);
+              $("#output").append("GET: " + results.name + "<br>");
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+              console.log("ajax通信に失敗しました");
+            })
+            .always(function (xhr) { });
+        });
+        $("#postbutton").click(function (e) {
+          var values = {
+            name: $("#textvalue").val(),
+          };
+          $.ajax({
+            type: "POST",
+            data: values,
+            url: "./users",
+          })
+            .done(function (results) {
+              console.log(results);
+              $("#output").append("POST: " + results.name + "<br>");
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+              console.log("ajax通信に失敗しました");
+            })
+            .always(function (xhr) { });
+        });
+        $("#putbutton").click(function (e) {
+          var values = {
+            name: $("#textvalue").val(),
+          };
+          $.ajax({
+            type: "PUT",
+            data: values,
+            url: "./users",
+          })
+            .done(function (results) {
+              console.log(results);
+              $("#output").append("PUT: " + results.name + "<br>");
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+              console.log("ajax通信に失敗しました");
+            })
+            .always(function (xhr) { });
+        });
+        $("#deletebutton").click(function (e) {
+          var values = {
+            name: $("#textvalue").val(),
+          };
+          $.ajax({
+            type: "DELETE",
+            data: values,
+            url: "./users",
+          })
+            .done(function (results) {
+              console.log(results);
+              $("#output").append("DELETE: " + results.name + "<br>");
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+              console.log("ajax通信に失敗しました");
+            })
+            .always(function (xhr) { });
+        });
+      </script>
+
+      <%- include('partials/footer.ejs'); %>
