@@ -62,3 +62,10 @@ const deleteData = async () => {
     })
   $('#output').append(`DELETE: ${fetchData}<br />`)
 }
+
+const showAlert = () => {
+  alert('JavaScriptを実行')
+}
+let values = {
+  name: $('#textvalue').val(),
+}

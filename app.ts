@@ -2,7 +2,6 @@ import express, { Request } from 'express'
 
 import userRouter from './router/users'
 import indexRouter from './router'
-import pageRouter from './router/page'
 import { port } from './config'
 
 var app = express()
@@ -25,7 +24,6 @@ export const methodJudge = (req: Request) => {
 }
 
 app.use('/', indexRouter)
-app.use('/page1', pageRouter)
 app.use('/users', userRouter)
 
 const httpStatus = require('http-status-codes')
