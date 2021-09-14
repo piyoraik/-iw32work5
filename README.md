@@ -21,13 +21,13 @@ whict make
 
 ### ポート番号
 
-CONTAINER_POST → Node で動作するポート番号
-HOST_PORT → ブラウザで動作するポート番号
+CONTAINER_POST → Node で動作するポート番号　　
+HOST_PORT → ブラウザで動作するポート番号　　
 
 ### イメージ
 
-IW_NODE_IMAGE → Docker イメージ・コンテナ名
-VERSION → Docker イメージのバージョン
+IW_NODE_IMAGE → Docker イメージ・コンテナ名　　
+VERSION → Docker イメージのバージョン　　
 
 ## Makefile
 
