@@ -9,11 +9,3 @@ RUN yarn install
 COPY . .
 ENTRYPOINT [ "yarn"]
 CMD ["dev"]
-
-FROM base-node
-RUN apk add yarn
-COPY ./package.json .
-RUN yarn install
-COPY . .
-ENTRYPOINT [ "yarn"]
-CMD ["dev"]
