@@ -1,34 +1,35 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
+import { methodJudge } from '../app'
 
 const userRouter = Router()
 
-userRouter.get('/', function (req, res) {
-  console.log('GET: ' + req.query.name)
-  var senddata = {
+userRouter.get('/', function (req: Request, res: Response) {
+  methodJudge(req)
+  const sendData = {
     name: req.query.name,
   }
-  res.send(senddata)
+  res.send(sendData)
 })
-userRouter.post('/', function (req, res) {
-  console.log('POST: ' + req.body.name)
-  var senddata = {
-    name: req.body.name,
+userRouter.post('/', function (req: Request, res: Response) {
+  methodJudge(req)
+  const sendData = {
+    name: req.body.params.name,
   }
-  res.send(senddata)
+  res.send(sendData)
 })
-userRouter.put('/', function (req, res) {
-  console.log('PUT: ' + req.body.name)
-  var senddata = {
-    name: req.body.name,
+userRouter.put('/', function (req: Request, res: Response) {
+  methodJudge(req)
+  const sendData = {
+    name: req.body.params.name,
   }
-  res.send(senddata)
+  res.send(sendData)
 })
-userRouter.delete('/', function (req, res) {
-  console.log('DELETE: ' + req.body.name)
-  var senddata = {
-    name: req.body.name,
+userRouter.delete('/', function (req: Request, res: Response) {
+  methodJudge(req)
+  const sendData = {
+    name: req.query.name,
   }
-  res.send(senddata)
+  res.send(sendData)
 })
 
 export = userRouter

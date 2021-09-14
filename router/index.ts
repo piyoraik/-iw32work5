@@ -1,10 +1,10 @@
-import { Router, Request } from 'express'
+import { Router, Request, Response } from 'express'
 
 const indexRouter = Router()
 
 let cnt = 0
 
-indexRouter.get('/', function (req, res) {
+indexRouter.get('/', function (req: Request, res: Response) {
   queryLog(req)
   res.render('index.ejs', {
     cnt,
@@ -12,16 +12,9 @@ indexRouter.get('/', function (req, res) {
   cnt++
 })
 
-indexRouter.post('/', function (req, res) {
+indexRouter.post('/', function (req: Request, res: Response) {
   queryLog(req)
   res.render('index.ejs', {
-    cnt,
-  })
-  cnt++
-})
-
-indexRouter.get('/page1', function (req, res) {
-  res.render('page1.ejs', {
     cnt,
   })
   cnt++
