@@ -5,7 +5,7 @@ help:
 	@echo "usage: make COMMAND"
 	@echo ""
 	@echo "Commands:"
-	@echo "  build            docker build --no-cache"
+	@echo "  build            yarn install && docker build --no-cache"
 	@echo "  run              docker run"
 	@echo "  exec             docker exec"
 	@echo "  logs             docker logs"
@@ -17,6 +17,10 @@ help:
 	@echo "  add package=     yarn add"
 
 build:
+	@docker build --target dev -t ${IW_NODE_IMAGE}:v${VERSION} ./ --no-cache
+
+install:
+	@yarn install
 	@docker build --target dev -t ${IW_NODE_IMAGE}:v${VERSION} ./ --no-cache
 
 run:
@@ -37,6 +41,9 @@ kill:
 restart:
 	@docker rm -f ${IW_NODE_IMAGE}
 	@docker run -d --name ${IW_NODE_IMAGE} -p ${HOST_PORT}:${CONTAINER_PORT} -v ${PWD}:/app ${IW_NODE_IMAGE}:v${VERSION}
+
+production:
+	@docker run -d --name ${IW_NODE_IMAGE} -p ${HOST_PORT}:${CONTAINER_PORT} ${IW_NODE_IMAGE}:v${VERSION}
 
 tsc-init:
 	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:v${VERSION} tsc --init
