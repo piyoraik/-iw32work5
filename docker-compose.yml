@@ -2,11 +2,11 @@ version: '3.9'
 services:
   node:
     container_name: ${IW_NODE_IMAGE}
-    build:
-      context: ./
-      target: dev
+    image: ${IW_NODE_IMAGE}:${VERSION}
     ports:
       - ${NODE_HOST_PORT}:${NODE_CONTAINER_PORT}
+    volumes:
+      - ${PWD}:/app
 
   mysql:
     container_name: mysql

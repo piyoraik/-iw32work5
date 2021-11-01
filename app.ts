@@ -1,4 +1,5 @@
 import express, { Request } from 'express'
+import bodyParser from 'body-parser'
 
 import userRouter from './router/users'
 import indexRouter from './router'

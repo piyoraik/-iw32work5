@@ -1,4 +1,4 @@
-IW_NODE_IMAGE:=node
+include .docker.env
 
 help:
 	@echo ""
@@ -17,6 +17,7 @@ help:
 	@echo "  add package=     yarn add"
 
 build:
+	@docker build --target dev -t ${IW_NODE_IMAGE}:${VERSION} ./ --no-cache
 	@docker compose --env-file .docker.env build --no-cache
 
 up:
@@ -40,8 +41,8 @@ kill:
 restart:
 	@docker compose --env-file .docker.env restart
 
-dev-add:
-	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:v${VERSION} add -D ${package}
+devadd:
+	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} add -D ${package}
 
 add:
-	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:v{VERSION} add ${package}
+	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} add ${package}
