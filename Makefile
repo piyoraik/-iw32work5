@@ -1,4 +1,4 @@
-include .env
+IW_NODE_IMAGE:=node
 
 help:
 	@echo ""
@@ -17,14 +17,10 @@ help:
 	@echo "  add package=     yarn add"
 
 build:
-	@docker build --target dev -t ${IW_NODE_IMAGE}:v${VERSION} ./ --no-cache
+	@docker compose --env-file .docker.env build --no-cache
 
-install:
-	@yarn install
-	@docker build --target dev -t ${IW_NODE_IMAGE}:v${VERSION} ./ --no-cache
-
-run:
-	@docker run -d --name ${IW_NODE_IMAGE} -p ${HOST_PORT}:${CONTAINER_PORT} -v ${PWD}:/app ${IW_NODE_IMAGE}:v${VERSION}
+up:
+	@docker compose --env-file .docker.env up -d
 
 exec:
 	@docker exec -it ${IW_NODE_IMAGE} bash
@@ -35,20 +31,16 @@ logs:
 flogs:
 	@docker logs -f ${IW_NODE_IMAGE}
 
+down:
+	@docker compose --env-file .docker.env down
+
 kill:
 	@docker rm -f ${IW_NODE_IMAGE}
 
 restart:
-	@docker rm -f ${IW_NODE_IMAGE}
-	@docker run -d --name ${IW_NODE_IMAGE} -p ${HOST_PORT}:${CONTAINER_PORT} -v ${PWD}:/app ${IW_NODE_IMAGE}:v${VERSION}
+	@docker compose --env-file .docker.env restart
 
-production:
-	@docker run -d --name ${IW_NODE_IMAGE} -p ${HOST_PORT}:${CONTAINER_PORT} ${IW_NODE_IMAGE}:v${VERSION}
-
-tsc-init:
-	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:v${VERSION} tsc --init
-
-devadd:
+dev-add:
 	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:v${VERSION} add -D ${package}
 
 add:
