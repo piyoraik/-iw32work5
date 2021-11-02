@@ -1,45 +1,34 @@
 import { Router, Request, Response } from 'express'
-import { methodJudge } from '../app'
+import { fetchAll, fetchOne } from '../service/userDB'
+import { FetchUserType } from '../Types/UserType'
 
 const indexRouter = Router()
 
-let cnt = 0
-
-indexRouter.get('/', function (req: Request, res: Response) {
-  queryLog(req)
+indexRouter.get('/', async (req: Request, res: Response) => {
+  const users = await fetchAll()
   res.render('index.ejs', {
-    cnt,
+    users: users.rows,
   })
-  cnt++
 })
 
 indexRouter.post('/', function (req: Request, res: Response) {
-  queryLog(req)
-  res.render('index.ejs', {
-    cnt,
-  })
-  cnt++
+  res.render('index.ejs', {})
 })
 
 indexRouter.get('/page1', function (req: Request, res: Response) {
-  methodJudge(req)
   res.render('page1.ejs')
 })
 
-indexRouter.get('/page2/:user', function (req: Request, res: Response) {
-  const user = req.params.user
+indexRouter.get('/page2/:user', async (req: Request, res: Response) => {
+  const fetchUser: FetchUserType | undefined = (await fetchOne(
+    req.params.user
+  )) as FetchUserType
+  console.log(fetchUser)
+  const user =
+    fetchUser.response === 200 ? fetchUser.rows[0].username : 'unknown'
   res.render('page2.ejs', {
     user,
   })
 })
-
-// method
-const queryLog = (req: Request) => {
-  if (req.method === 'POST') {
-    console.log('post_data: ' + req.body.name)
-  } else if (req.method === 'GET') {
-    console.log('get_data: ' + req.query.name)
-  }
-}
 
 export = indexRouter

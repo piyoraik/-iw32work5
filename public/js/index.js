@@ -1,71 +1,75 @@
 const getData = async () => {
-  const inputValue = document.getElementById('textvalue').value
-  const params = {
-    name: inputValue,
-  }
+  const id = document.getElementById('id').value
   const fetchData = await axios
-    .get('/users', { params })
+    .get(`/users/${id}`, {})
     .then((result) => {
-      return result.data.name
+      return result.data
     })
     .catch((err) => {
-      console.log(err)
+      return err.data
     })
-  $('#output').append(`GET: ${fetchData}<br />`)
+  let res
+  switch (fetchData.response) {
+    case 200:
+      res = `${fetchData.rows[0].id}  ${fetchData.rows[0].email} ${fetchData.rows[0].username} ${fetchData.rows[0].password}`
+      break
+    case 400:
+      res = 'Error!!'
+    default:
+      res = 'Error!'
+  }
+  $('#output').append(`GET: ${res}<br />`)
 }
 
 const postData = async () => {
-  const inputValue = document.getElementById('textvalue').value
   const params = {
-    name: inputValue,
+    id: document.getElementById('id').value,
+    email: document.getElementById('email').value,
+    username: document.getElementById('username').value,
+    password: document.getElementById('password').value,
   }
   const fetchData = await axios
     .post('/users', { params })
     .then((result) => {
       console.log(result)
-      return result.data.name
+      return result.data.message
     })
     .catch((err) => {
-      console.log(err)
+      return err.data.message
     })
   $('#output').append(`POST: ${fetchData}<br />`)
 }
 
 const putData = async () => {
-  const inputValue = document.getElementById('textvalue').value
+  const id = document.getElementById('id').value
   const params = {
-    name: inputValue,
+    email: document.getElementById('email').value,
+    username: document.getElementById('username').value,
+    password: document.getElementById('password').value,
   }
   const fetchData = await axios
-    .put('/users', { params })
+    .put(`/users/${id}`, { params })
     .then((result) => {
-      return result.data.name
+      return result.data.message
     })
     .catch((err) => {
-      console.log(err)
+      const message = err.data ? err.data.message : 'Error!'
+      return message
     })
   $('#output').append(`PUT: ${fetchData}<br />`)
 }
 
 const deleteData = async () => {
-  const inputValue = document.getElementById('textvalue').value
-  const params = {
-    name: inputValue,
-  }
+  const id = document.getElementById('id').value
   const fetchData = await axios
-    .delete('/users', { params })
+    .delete(`/users/${id}`)
     .then((result) => {
-      return result.data.name
+      console.log(result)
+      return result.data.message
     })
     .catch((err) => {
-      console.log(err)
+      const message = err.data ? err.data.message : 'Error!'
+      return message
     })
   $('#output').append(`DELETE: ${fetchData}<br />`)
-}
-
-const showAlert = () => {
-  alert('JavaScriptを実行')
-}
-let values = {
-  name: $('#textvalue').val(),
 }

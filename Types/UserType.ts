@@ -4,3 +4,8 @@ export interface UserType {
   email: string
   password: string
 }
+
+export interface FetchUserType {
+  response: number
+  rows: [UserType]
+}

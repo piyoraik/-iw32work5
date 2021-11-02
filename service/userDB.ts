@@ -16,7 +16,7 @@ export const fetchAll = async () => {
   } catch (err) {
     return {
       response: 400,
-      err,
+      message: 'Error!',
     }
   }
 }
@@ -27,6 +27,7 @@ export const fetchOne = async (params: string) => {
     const sql = `SELECT * FROM ${TABLE} WHERE id = ? LIMIT 1`
     const [rows] = await connection.execute(sql, [params])
     if (Object.keys(rows).length === 0) throw 'データが見つかりませんでした。'
+    console.log(rows)
     return {
       response: 200,
       rows,
@@ -34,7 +35,7 @@ export const fetchOne = async (params: string) => {
   } catch (err) {
     return {
       response: 400,
-      err,
+      message: 'Error!',
     }
   }
 }
@@ -51,18 +52,19 @@ export const postUser = async (req: UserType) => {
     ])
     return {
       response: 200,
-      rows,
+      message: 'Success!!',
     }
   } catch (err) {
     return {
       response: 400,
-      err,
+      message: 'Error!',
     }
   }
 }
 
 export const updateUser = async (req: UserType) => {
   try {
+    console.log(req)
     const connection = await mysql.createConnection(dbsetting)
     const sql = `UPDATE ${TABLE} SET username = ?, email = ?, password = ? WHERE id = ?`
     const [rows] = await connection.execute(sql, [
@@ -73,12 +75,13 @@ export const updateUser = async (req: UserType) => {
     ])
     return {
       response: 200,
-      rows,
+      message: 'Success!!',
     }
   } catch (err) {
+    console.log(err)
     return {
       response: 400,
-      err,
+      message: 'Error!',
     }
   }
 }
@@ -90,12 +93,12 @@ export const deleteUser = async (id: string) => {
     const [rows] = await connection.execute(sql, [id])
     return {
       response: 200,
-      rows,
+      message: 'Success!!',
     }
   } catch (err) {
     return {
       response: 400,
-      err,
+      message: 'Error!',
     }
   }
 }

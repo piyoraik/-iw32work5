@@ -1,8 +1,23 @@
 <%- include('partials/header.ejs'); %>
   <h1>node4 Hello page1.ejs Page</h1>
   <div>
-    <label for="textvalue">ユーザーメンテナンス（非同期通信）</label><br>
-    <input type="text" name="name" id="textvalue" />
+    <span>ユーザーメンテナンス（非同期通信）</span><br>
+    <div>
+      <label for="id">id</label>
+      <input type="text" name="id" id="id" />
+    </div>
+    <div>
+      <label for="email">email</label>
+      <input type="text" name="email" id="email" />
+    </div>
+    <div>
+      <label for="username">username</label>
+      <input type="text" name="username" id="username" />
+    </div>
+    <div>
+      <label for="password">password</label>
+      <input type="text" name="password" id="password" />
+    </div>
   </div>
   <button type="submit" onclick="getData()">取得（GET）</button>
   <button type="submit" onclick="postData()">登録（POST）</button>

@@ -1,23 +1,36 @@
-<%- include('partials/header.ejs'); %>
+<%- include('partials/header.ejs') %>
   <h1>node4 Hello index.html Page</h1>
-  <p><button onclick="showAlert()">JSを実行</button></p>
-  <form action="/" method="GET">
-    <p>・GET転送<br />
-      <input type="text" name="name" id="getValue" />
-      <input type="submit" value="GET送信">
-  </form>
-  <form action="/" method="POST">
-    <p>・POST転送<br />
-      <input type="text" name="name" id="postValue" />
-      <input type="submit" value="POST送信">
-  </form>
 
-  <div>
-    <% for (var i=0; i < 10; i++) { %>
-      <p>このループは<%= i+1 %>回目です。</p>
-      <% } %>
-  </div>
+  <hr />
+  <table>
+    <thead>
+      <th>id</th>
+      <th>userID</th>
+      <th>username</th>
+      <th>email</th>
+      <th>password</th>
+    </thead>
+    <tbody>
+      <% for(let i in users){ %>
+        <tr>
+          <td>
+            <%= i %>
+          </td>
+          <td>
+            <%= users[i].id %>
+          </td>
+          <td>
+            <%= users[i].username %>
+          </td>
+          <td>
+            <%= users[i].email %>
+          </td>
+          <td>
+            <%= users[i].password %>
+          </td>
+        </tr>
+        <% } %>
+    </tbody>
+  </table>
 
-  <%= cnt %>
-
-    <%- include('partials/footer.ejs'); %>
+  <%- include('partials/footer.ejs') %>
