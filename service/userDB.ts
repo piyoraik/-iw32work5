@@ -64,7 +64,6 @@ export const postUser = async (req: UserType) => {
 
 export const updateUser = async (req: UserType) => {
   try {
-    console.log(req)
     const connection = await mysql.createConnection(dbsetting)
     const sql = `UPDATE ${TABLE} SET username = ?, email = ?, password = ? WHERE id = ?`
     const [rows] = await connection.execute(sql, [

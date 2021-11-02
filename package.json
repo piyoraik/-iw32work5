@@ -5,6 +5,7 @@
   "main": "app4-6.js",
   "scripts": {
     "dev": "nodemon -L",
+    "tsc": "tsc",
     "ts-node": "ts-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
