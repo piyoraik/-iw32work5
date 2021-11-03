@@ -46,3 +46,15 @@ devadd:
 
 add:
 	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} add ${package}
+
+sequelize-help:
+	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} sequelize-cli
+
+migrate:
+	@docker compose --env-file .docker.env run --rm node sequelize-cli db:migrate
+
+rollback-reset:
+	@docker compose --env-file .docker.env run --rm node sequelize-cli db:migrate:undo:all
+
+rollback:
+	@docker compose --env-file .docker.env run --rm node sequelize-cli db:migrate:undo
