@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userPostValidation = void 0;
-var express_validator_1 = require("express-validator");
-var userPostValidation = function () {
+const express_validator_1 = require("express-validator");
+const userPostValidation = () => {
     return [
         (0, express_validator_1.param)('id').not().isEmpty(),
         (0, express_validator_1.param)('username').not().isEmpty(),

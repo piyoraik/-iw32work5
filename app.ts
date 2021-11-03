@@ -1,7 +1,7 @@
 import express from 'express'
 import userRouter from './router/users'
 import indexRouter from './router'
-import { port } from './config'
+import { port } from './config/config'
 
 var app = express()
 app.set('view engin', 'ejs')

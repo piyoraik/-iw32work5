@@ -7,5 +7,5 @@ export interface UserType {
 
 export interface FetchUserType {
   response: number
-  rows: [UserType]
+  rows: [UserType] | string
 }

@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise'
-import { dbsetting } from '../config'
+import { dbsetting } from '../config/config'
 import { UserType } from '../Types/UserType'
 
 const TABLE = 't01_users'

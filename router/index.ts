@@ -20,12 +20,11 @@ indexRouter.get('/page1', function (req: Request, res: Response) {
 })
 
 indexRouter.get('/page2/:user', async (req: Request, res: Response) => {
-  const fetchUser: FetchUserType | undefined = (await fetchOne(
+  const fetchUser: FetchUserType = (await fetchOne(
     req.params.user
   )) as FetchUserType
-  console.log(fetchUser)
   const user =
-    fetchUser.response === 200 ? fetchUser.rows[0].username : 'unknown'
+    typeof fetchUser.rows !== 'string' ? fetchUser.rows[0].username : 'unknown'
   res.render('page2.ejs', {
     user,
   })
