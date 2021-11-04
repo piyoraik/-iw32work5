@@ -1,13 +1,14 @@
 import { Router, Request, Response } from 'express'
+import { isUserType } from '../lib/isType'
 import { fetchAll, fetchOne } from '../service/userDB'
-import { FetchUserType } from '../Types/UserType'
+import { FetchUserType, FetchMessageType } from '../Types/UserType'
 
 const indexRouter = Router()
 
 indexRouter.get('/', async (req: Request, res: Response) => {
   const users = await fetchAll()
   res.render('index.ejs', {
-    users: users.rows,
+    users: isUserType(users) ? users.rows : 'Error!',
   })
 })
 
@@ -24,7 +25,7 @@ indexRouter.get('/page2/:user', async (req: Request, res: Response) => {
     req.params.user
   )) as FetchUserType
   const user =
-    typeof fetchUser.rows !== 'string' ? fetchUser.rows[0].username : 'unknown'
+    fetchUser.rows !== undefined ? fetchUser.rows[0].username : 'unknown'
   res.render('page2.ejs', {
     user,
   })

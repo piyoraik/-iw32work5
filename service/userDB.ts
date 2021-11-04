@@ -1,10 +1,10 @@
 import mysql from 'mysql2/promise'
 import { dbsetting } from '../config/config'
-import { UserType } from '../Types/UserType'
+import { FetchMessageType, FetchUserType, UserType } from '../Types/UserType'
 
 const TABLE = 't01_users'
 
-export const fetchAll = async () => {
+export const fetchAll = async (): Promise<FetchUserType | FetchMessageType> => {
   try {
     const connection = await mysql.createConnection(dbsetting)
     const sql = `SELECT * FROM ${TABLE}`
@@ -12,7 +12,7 @@ export const fetchAll = async () => {
     return {
       response: 200,
       rows,
-    }
+    } as FetchUserType
   } catch (err) {
     return {
       response: 400,
@@ -21,17 +21,18 @@ export const fetchAll = async () => {
   }
 }
 
-export const fetchOne = async (params: string) => {
+export const fetchOne = async (
+  params: string
+): Promise<FetchUserType | FetchMessageType> => {
   try {
     const connection = await mysql.createConnection(dbsetting)
     const sql = `SELECT * FROM ${TABLE} WHERE id = ? LIMIT 1`
     const [rows] = await connection.execute(sql, [params])
     if (Object.keys(rows).length === 0) throw 'データが見つかりませんでした。'
-    console.log(rows)
     return {
       response: 200,
       rows,
-    }
+    } as FetchUserType
   } catch (err) {
     return {
       response: 400,
@@ -40,7 +41,7 @@ export const fetchOne = async (params: string) => {
   }
 }
 
-export const postUser = async (req: UserType) => {
+export const postUser = async (req: UserType): Promise<FetchMessageType> => {
   try {
     const connection = await mysql.createConnection(dbsetting)
     const sql = `INSERT INTO ${TABLE} (id, username, email, password) VALUES (?, ?, ?, ?)`
@@ -62,7 +63,7 @@ export const postUser = async (req: UserType) => {
   }
 }
 
-export const updateUser = async (req: UserType) => {
+export const updateUser = async (req: UserType): Promise<FetchMessageType> => {
   try {
     const connection = await mysql.createConnection(dbsetting)
     const sql = `UPDATE ${TABLE} SET username = ?, email = ?, password = ? WHERE id = ?`
@@ -85,7 +86,7 @@ export const updateUser = async (req: UserType) => {
   }
 }
 
-export const deleteUser = async (id: string) => {
+export const deleteUser = async (id: string): Promise<FetchMessageType> => {
   try {
     const connection = await mysql.createConnection(dbsetting)
     const sql = `DELETE FROM ${TABLE} WHERE id = ?`

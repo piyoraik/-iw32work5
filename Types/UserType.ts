@@ -7,5 +7,10 @@ export interface UserType {
 
 export interface FetchUserType {
   response: number
-  rows: [UserType] | string
+  rows: [UserType]
+}
+
+export interface FetchMessageType {
+  response: number
+  message: string
 }
