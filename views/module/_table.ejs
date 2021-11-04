@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <th>id</th>
+    <th>userID</th>
+    <th>username</th>
+    <th>email</th>
+    <th>password</th>
+  </thead>
+  <tbody>
+    <% for(let i in users){ %>
+      <tr>
+        <td>
+          <%= i %>
+        </td>
+        <td>
+          <%= users[i].id %>
+        </td>
+        <td>
+          <%= users[i].username %>
+        </td>
+        <td>
+          <%= users[i].email %>
+        </td>
+        <td>
+          <%= users[i].password %>
+        </td>
+      </tr>
+      <% } %>
+  </tbody>
+</table>

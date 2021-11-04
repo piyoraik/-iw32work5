@@ -8,7 +8,7 @@ import {
   postUser,
   updateUser,
 } from '../service/userDB'
-import { UserType } from '../Types/UserType'
+import { UserType } from '../types/UserType'
 
 const userRouter = Router()
 

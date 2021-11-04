@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise'
 import { dbsetting } from '../config/config'
-import { FetchMessageType, FetchUserType, UserType } from '../Types/UserType'
+import { FetchMessageType, FetchUserType, UserType } from '../types/UserType'
 
 const TABLE = 't01_users'
 
@@ -17,7 +17,7 @@ export const fetchAll = async (): Promise<FetchUserType | FetchMessageType> => {
     return {
       response: 400,
       message: 'Error!',
-    }
+    } as FetchMessageType
   }
 }
 

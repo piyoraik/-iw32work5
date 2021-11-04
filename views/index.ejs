@@ -2,35 +2,9 @@
   <h1>node4 Hello index.html Page</h1>
 
   <hr />
-  <table>
-    <thead>
-      <th>id</th>
-      <th>userID</th>
-      <th>username</th>
-      <th>email</th>
-      <th>password</th>
-    </thead>
-    <tbody>
-      <% for(let i in users){ %>
-        <tr>
-          <td>
-            <%= i %>
-          </td>
-          <td>
-            <%= users[i].id %>
-          </td>
-          <td>
-            <%= users[i].username %>
-          </td>
-          <td>
-            <%= users[i].email %>
-          </td>
-          <td>
-            <%= users[i].password %>
-          </td>
-        </tr>
-        <% } %>
-    </tbody>
-  </table>
-
-  <%- include('partials/footer.ejs') %>
+  <% if (typeof users==='object' ){ %>
+    <%- include('module/_table', {users: users}) %>
+      <% }else{ %>
+        <%= users %>
+          <% } %>
+            <%- include('partials/footer.ejs') %>
