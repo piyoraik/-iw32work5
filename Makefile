@@ -17,32 +17,32 @@ help:
 	@echo "  add package=     yarn add"
 
 build:
-	@docker build --target dev -t ${IW_NODE_IMAGE}:${VERSION} ./ --no-cache
+	@docker image build --target dev -t ${IW_NODE_IMAGE}:${VERSION} ./ --no-cache
 	@docker compose --env-file .docker.env build --no-cache
 
 up:
 	@docker compose --env-file .docker.env up -d
 
 exec:
-	@docker exec -it ${IW_NODE_IMAGE} bash
+	@docker container exec -it ${IW_NODE_IMAGE} bash
 
 logs:
-	@docker logs ${IW_NODE_IMAGE}
+	@docker container logs ${IW_NODE_IMAGE}
 
 flogs:
-	@docker logs -f ${IW_NODE_IMAGE}
+	@docker container logs -f ${IW_NODE_IMAGE}
 
 down:
 	@docker compose --env-file .docker.env down
 
 kill:
-	@docker rm -f ${IW_NODE_IMAGE}
+	@docker container rm -f ${IW_NODE_IMAGE}
 
 restart:
 	@docker compose --env-file .docker.env restart
 
 devadd:
-	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} add -D ${package}
+	@docker container run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} add -D ${package}
 
 add:
-	@docker run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} add ${package}
+	@docker container run --rm -v ${PWD}:/app ${IW_NODE_IMAGE}:${VERSION} add ${package}
