@@ -12,7 +12,6 @@ help:
 	@echo "  flogs            docker -f logs"
 	@echo "  kill             docker rm"
 	@echo "  restart          docker rm && run"
-	@echo "  tsc-init         tsc --init"
 	@echo "  devadd package=  yarn add -D"
 	@echo "  add package=     yarn add"
 

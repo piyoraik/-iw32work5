@@ -51,7 +51,7 @@ VERSION → Docker イメージのバージョン
 ### show help
 
 ```sh
-make help
+make
 ```
 
 ## How to Use
