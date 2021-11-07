@@ -17,7 +17,7 @@ export const fetchAll = async (): Promise<FetchUserType | FetchMessageType> => {
     return {
       response: 400,
       message: 'Error!',
-    } as FetchMessageType
+    }
   }
 }
 

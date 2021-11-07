@@ -32,7 +32,7 @@ userRouter.post(
       username,
       email,
       password,
-    } as UserType)
+    })
     res.send(dbQuery)
   }
 )
