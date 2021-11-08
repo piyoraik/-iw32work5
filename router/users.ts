@@ -8,7 +8,6 @@ import {
   postUser,
   updateUser,
 } from '../service/userDB'
-import { UserType } from '../types/UserType'
 
 const userRouter = Router()
 
@@ -52,7 +51,7 @@ userRouter.put('/:id', async (req: Request, res: Response) => {
     username,
     email,
     password,
-  } as UserType)
+  })
   res.send(dbQuery)
 })
 
